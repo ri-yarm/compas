@@ -1,6 +1,7 @@
 package com.example.compas
 
 import android.content.Context
+import android.content.DialogInterface
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -10,6 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.compas.databinding.ActivityMainBinding
 
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
 
         manager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+        createSimpleDialog()
     }
 
     override fun onResume() {
@@ -68,5 +72,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+    }
+
+    private fun  createSimpleDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Привет")
+        builder.setMessage("Всё хорошо?")
+        builder.setNeutralButton("Что?", DialogInterface.OnClickListener { dialogInterface, i ->  })
+        builder.setNegativeButton("Нет", DialogInterface.OnClickListener { dialogInterface, i ->  })
+        builder.setPositiveButton("Да", DialogInterface.OnClickListener { dialogInterface, i ->  })
+        builder.show()
     }
 }
